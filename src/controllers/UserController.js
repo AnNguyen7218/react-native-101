@@ -5,7 +5,7 @@ class UserController {
     this.basePath = '/users';
   }
   // fake call api
-  login = (email, name) => {email, name}
+  login = (email, name) => ({email, name})
   
   logout = () => null;
 }

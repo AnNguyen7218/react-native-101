@@ -22,39 +22,37 @@ import { login, actionTypes } from 'actions/UserActions';
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 function Login(props) {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  let [email, setEmail] = useState('');
+  let [name, setName] = useState('');
 
   const user = useSelector(state => getUser(state));
   
   const dispatch = useDispatch();
  
-  const loginUser =  useCallback((email, name) => useDispatch(login(email, name), [email, name, dispatch]));
+  const loginUser =  useCallback((email, name) => dispatch(login(email, name), [email, name, dispatch]));
 
-  const getAccessToken = useCallback(() => {
+  const getAccessToken = () => {
     AccessToken.getCurrentAccessToken().then(data => {
       console.log(data.accessToken.toString());
       getUserInfo()
     });
-  })
+  }
   
   const updateState = (email, name) => {
     setName(name);
     setEmail(email);
   }
   
-  const getResponseInfoCb = useCallback((error, result) => {
+  const getResponseInfoCb = (error, result) => {
     if (error) {
       alert('Error fetching data: ' + error.toString());
     } else {
       const {email, name} = result
-      console.log({email, name});
-// nà sao 
       updateState(email, name)
     }
-  })
+  }
   
-  const getUserInfo = useCallback(() => {
+  const getUserInfo = () => {
     const processRequest = new GraphRequest(
       '/me',
       {
@@ -67,16 +65,15 @@ function Login(props) {
       getResponseInfoCb
     );
     new GraphRequestManager().addRequest(processRequest).start();
-  })
+  }
 
-  const onToggleLogin = useCallback(() => {
+  const onToggleLogin = () => {
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       function (result) {
         if (result.isCancelled) {
           alert('Login cancelled')
         } else {
           alert('Login success with permissions: ' + result.grantedPermissions.toString())
-          console.log(result)
           getAccessToken()
         }
       },
@@ -84,7 +81,7 @@ function Login(props) {
         alert('Login fail with error: ' + error)
       }
     )
-  })
+  }
 
   useEffect(() => {
     if (user !== null) {
