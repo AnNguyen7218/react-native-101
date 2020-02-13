@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">rntemplate</string>
+    <string name="app_name">CunMap</string>
+    <string name="facebook_app_id">191789561897655</string>
+    <string name="fb_login_protocol_scheme">fb191789561897655</string>
 </resources>

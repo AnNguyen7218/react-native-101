@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'rntemplate' do
-  # Pods for rntemplate
+target 'cunmap' do
+  # Pods for cunmap
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -37,7 +37,8 @@ target 'rntemplate' do
   pod ‘ReactNativeLocalization’,
     :path => “../node_modules/react-native-localization”
 
-  target 'rntemplateTests' do
+
+  target 'cunmapTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -45,10 +46,10 @@ target 'rntemplate' do
   use_native_modules!
 end
 
-target 'rntemplate-tvOS' do
-  # Pods for rntemplate-tvOS
+target 'cunmap-tvOS' do
+  # Pods for cunmap-tvOS
 
-  target 'rntemplate-tvOSTests' do
+  target 'cunmap-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

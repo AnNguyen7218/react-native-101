@@ -19,6 +19,8 @@ import { isLoadingSelector } from 'selectors/StatusSelectors';
 import strings from 'localization';
 import { login, actionTypes } from 'actions/UserActions';
 
+import FBLoginButton from './FBLoginButton'
+
 function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -63,6 +65,7 @@ function Login(props) {
           onPress={loginUser}
           title={isLoading ? strings.loading : strings.login}
         />
+        <FBLoginButton />
       </View>
     </View>
   );

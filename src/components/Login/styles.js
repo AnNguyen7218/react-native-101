@@ -16,6 +16,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
     padding: 20,
   },
+  fbWrapper: {
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    marginTop: 10
+  },
+  fbBtn: {
+    backgroundColor: Colors.lightBlue
+  }
 });
 
 export default styles;
