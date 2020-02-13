@@ -13,12 +13,37 @@ export default class FBLoginButton extends Component {
         } else {
           alert('Login success with permissions: ' + result.grantedPermissions.toString())
           console.log(result)
+          this.getAccessToken()
         }
       },
       function (error) {
         alert('Login fail with error: ' + error)
       }
     )
+  }
+
+  getAccessToken = () => {
+    AccessToken.getCurrentAccessToken().then(data => {
+      console.log(data.accessToken.toString());
+      this.getUserInfo()
+    });
+  }
+
+  getUserInfo = () => {
+    const processRequest = new GraphRequest(
+      '/me?fields=name,picture.type(large)',
+      null,
+      this.getResponseInfo
+    );
+    new GraphRequestManager().addRequest(processRequest).start();
+  }
+
+  getResponseInfo = (error, result) => {
+    if (error) {
+      alert('Error fetching data: ' + error.toString());
+    } else {
+      console.log(result);
+    }
   }
   render() {
     return (
