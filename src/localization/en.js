@@ -1,7 +1,7 @@
 export default {
   login: 'Login',
   loading: 'Loading',
-  password: 'Password',
+  name: 'Name',
   email: 'Email',
   home: 'Home',
   homeMessage: 'Welcome',
