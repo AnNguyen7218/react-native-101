@@ -17,7 +17,7 @@ import getUser from 'selectors/UserSelectors';
 import errorsSelector from 'selectors/ErrorSelectors';
 import { isLoadingSelector } from 'selectors/StatusSelectors';
 import strings from 'localization';
-import { login, actionTypes } from 'actions/UserActions';
+import { login } from 'actions/UserActions';
 
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
@@ -33,7 +33,6 @@ function Login(props) {
 
   const getAccessToken = () => {
     AccessToken.getCurrentAccessToken().then(data => {
-      console.log(data.accessToken.toString());
       getUserInfo()
     });
   }
