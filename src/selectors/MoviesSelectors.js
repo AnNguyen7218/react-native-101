@@ -19,3 +19,8 @@ export const listViewPopularData = state => {
   const {listIdsPopular, listDataPopular} = state.movies
   return _.compact(listIdsPopular.map(id => listDataPopular[id]))
 }
+
+export const searchResult = state => state.movies.searchResult
+export const searchResultIndex = state => state.movies.searchResultIndex
+export const searchResultTotalPage = state => state.movies.searchResultTotalPage
+

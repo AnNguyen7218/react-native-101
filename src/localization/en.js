@@ -8,4 +8,7 @@ export default {
   profile: 'Profile',
   profileMessage: 'And this one has a nav, but with a different color than the login.',
   logout: 'Logout',
+  search: 'Search',
+  searchPlaceHolder: 'Type something...',
+  published: 'Published'
 };

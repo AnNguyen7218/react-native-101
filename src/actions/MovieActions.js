@@ -11,6 +11,12 @@ export const actionTypes = {
   GET_LIST_POPULAR_MOVIES_REQUEST: 'GET_LIST_POPULAR_MOVIES_REQUEST',
   GET_LIST_POPULAR_MOVIES_ERROR: 'GET_LIST_POPULAR_MOVIES_ERROR',
   GET_LIST_POPULAR_MOVIES_SUCCESS: 'GET_LIST_POPULAR_MOVIES_SUCCESS',
+
+  CLEAR_SEARCH_MOVIES: 'CLEAR_SEARCH_MOVIES',
+  SEARCH_MOVIES_REQUEST: 'SEARCH_MOVIES_REQUEST',
+  SEARCH_MOVIES_REQUEST_SUCCESS: 'SEARCH_MOVIES_REQUEST_SUCCESS',
+  SEARCH_MOVIES_REQUEST_FAILED: 'SEARCH_MOVIES_REQUEST_FAILED',
+
 };
 
 const getListTopRated = () => ({
@@ -45,7 +51,27 @@ const getListPopularSuccess = (movies, pageIndex, totalPages) => ({
   totalPages,
 });
 
-export const getTopRateMovies = (pageIndex) => async (dispatch) => {
+const searchMovie = () => ({
+  type: actionTypes.SEARCH_MOVIES_REQUEST
+})
+
+const clearSearchMovie = () => ({
+  type: actionTypes.CLEAR_SEARCH_MOVIES
+})
+
+const searchMovieSuccess = (searchResult, pageIndex, totalPages) => ({
+  type: actionTypes.SEARCH_MOVIES_REQUEST_SUCCESS,
+  searchResult,
+  pageIndex,
+  totalPages,
+})
+
+const searchMovieFailed = (error) => ({
+  type: actionTypes.SEARCH_MOVIES_REQUEST_FAILED, 
+  error
+})
+
+export const getTopRateMovies = (pageIndex = 1) => async (dispatch) => {
   dispatch(getListTopRated());
   try {
     const movies = await MovieController.getTopRated(pageIndex);
@@ -56,7 +82,7 @@ export const getTopRateMovies = (pageIndex) => async (dispatch) => {
   }
 };
 
-export const getPopularMovies = (pageIndex) => async (dispatch) => {
+export const getPopularMovies = (pageIndex = 1) => async (dispatch) => {
   dispatch(getListPopular());
   try {
     const movies = await MovieController.getPopular(pageIndex);
@@ -67,3 +93,17 @@ export const getPopularMovies = (pageIndex) => async (dispatch) => {
   }
 };
 
+export const callSearchMovies = (pageIndex, searchText) => async (dispatch) => {
+  dispatch(searchMovie());
+  try {
+    const searchResult = await MovieController.search(pageIndex, searchText);
+    return dispatch(searchMovieSuccess(searchResult.results, pageIndex, searchResult.total_pages));
+  } catch (error) {
+    console.log(error)
+    return dispatch(searchMovieFailed(error));
+  }
+}
+
+export const callClearSearchState = () => async (dispatch) => {
+  dispatch(clearSearchMovie());
+}

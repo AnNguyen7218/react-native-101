@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Profile from '../Profile';
 import Home from '../Home';
+import Search from '../Search';
 
 import homeIcon from 'assets/ic_home/ic_home.png';
 import settingsIcon from 'assets/ic_settings/ic_settings.png';
@@ -13,6 +14,8 @@ import Colors from 'helpers/Colors';
 const iconForTab = ({ state }) => {
   switch (state.routeName) {
     case 'Home':
+      return homeIcon;
+    case 'Search':
       return homeIcon;
     case 'Profile':
       return settingsIcon;
@@ -30,9 +33,12 @@ const TabIcon = ({ icon, tintColor }) => (// eslint-disable-line
 
 const ProfileStack = createStackNavigator({ Profile });
 const HomeStack = createStackNavigator({ Home });
+const SearchStack = createStackNavigator({ Search });
+
 const AppStack = createBottomTabNavigator(
   {
     Home: HomeStack,
+    Search: SearchStack,
     Profile: ProfileStack,
   },
   {

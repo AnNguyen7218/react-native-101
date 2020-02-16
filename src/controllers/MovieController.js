@@ -13,34 +13,29 @@ class MovieController {
       return error
     }
   }
+
   getPopular = async (index) => {
     let page = index >= 1 ? '&page='+index : ''
     let url = API_URL+ENDPOINT.POPULAR()+'?api_key='+API_KEY+page
-    console.log(url)
     try {
       const result = await axios.get(url)
-      console.log(result)
       return result.data
     } catch (error) {
       return error
     }
   }
-  // search = async () => {
-  //   try {
-  //     const result = await httpClient.post({
-  //       url: endpoints.TOP_RATE()+'?api_key='+API_KEY,
-  //       method: 'POST',
-  //       data: {
-  //         email,
-  //         password,
-  //       },
-  //     });
-  //     console.log(result.data)
-  //     return {};
-  //   } catch (error) {
-  //     return error;
-  //   }
-  // },
+
+  search = async (index, searchText) => {
+    let page = index >= 1 ? '&page='+index : ''
+    let query = '&query='+searchText
+    let url = API_URL+ENDPOINT.SEARCH()+'?api_key='+API_KEY+query+page
+    try {
+      const result = await axios.get(url)
+      return result.data
+    } catch (error) {
+      return error;
+    }
+  }
   // getMovieDetails = async (movieId) => {
   //   try {
   //     const result = await httpClient.post({

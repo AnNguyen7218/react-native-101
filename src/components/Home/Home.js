@@ -36,6 +36,7 @@ function Home() {
   const popularData = useSelector(state => listViewPopularData(state));
 
   const dispatch = useDispatch();
+  
   const getMessage = useCallback(() => `${strings.homeMessage} ${user && user.name}`, [user]);
   
   const getTopRated = useCallback((pageIndex) => dispatch(getTopRateMovies(pageIndex), [dispatch]));
@@ -53,63 +54,63 @@ function Home() {
 
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <Text style={TextStyles.lightTitle}>
-        {getMessage()}
-      </Text>
+      <View style={styles.container}>
         <Text style={TextStyles.lightTitle}>
-          Top Rated Movies
+          {getMessage()}
         </Text>
-        <View>
-          {!_.isEmpty(topRatedData) && 
-            <FlatList 
-              onEndReachedThreshold={1}
-              style={styles.scrollView}
-              data = {topRatedData}
-              onEndReached={() => getTopRated(pageIndex)}
-              renderItem={({item}) => {
-                return (
-                  <View key={item.id} style={styles.movieItem}>
-                    <Image
-                      style={{width: 150, height: 250}}
-                      source={{uri: BASE_IMG_URL+item.poster_path}}
-                    />
-                  </View>
-                )
-              }}
-              keyExtractor={item => item.id.toString()}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-            />
-          }
-        </View>
-        <Text style={TextStyles.lightTitle}>
-          Top Popular Movies
-        </Text>
-        <View>
-          {!_.isEmpty(popularData) && 
-            <FlatList 
-              onEndReachedThreshold={1}
-              style={styles.scrollView}
-              data = {popularData}
-              onEndReached={() => getPopular(pagePopularIndex)}
-              renderItem={({item}) => {
-                return (
-                  <View key={item.id} style={styles.movieItem}>
-                    <Image
-                      style={{width: 150, height: 250}}
-                      source={{uri: BASE_IMG_URL+item.poster_path}}
-                    />
-                  </View>
-                )
-              }}
-              keyExtractor={item => item.id.toString()}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-            />
-          }
-        </View>
-    </View>
+          <Text style={TextStyles.lightTitle}>
+            Top Rated Movies
+          </Text>
+          <View>
+            {!_.isEmpty(topRatedData) && 
+              <FlatList 
+                onEndReachedThreshold={1}
+                style={styles.scrollView}
+                data = {topRatedData}
+                onEndReached={() => getTopRated(pageIndex)}
+                renderItem={({item}) => {
+                  return (
+                    <View key={item.id} style={styles.movieItem}>
+                      <Image
+                        style={{width: 150, height: 250}}
+                        source={{uri: BASE_IMG_URL+item.poster_path}}
+                      />
+                    </View>
+                  )
+                }}
+                keyExtractor={item => item.id.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
+            }
+          </View>
+          <Text style={TextStyles.lightTitle}>
+            Top Popular Movies
+          </Text>
+          <View>
+            {!_.isEmpty(popularData) && 
+              <FlatList 
+                onEndReachedThreshold={1}
+                style={styles.scrollView}
+                data = {popularData}
+                onEndReached={() => getPopular(pagePopularIndex)}
+                renderItem={({item}) => {
+                  return (
+                    <View key={item.id} style={styles.movieItem}>
+                      <Image
+                        style={{width: 150, height: 250}}
+                        source={{uri: BASE_IMG_URL+item.poster_path}}
+                      />
+                    </View>
+                  )
+                }}
+                keyExtractor={item => item.id.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
+            }
+          </View>
+      </View>
     </ScrollView>
   );
 }

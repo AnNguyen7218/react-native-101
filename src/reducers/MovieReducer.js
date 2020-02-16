@@ -9,7 +9,10 @@ const initialState = {
   listDataPopular: {},
   listIdsPopular: [],
   pageIndexPopular: 1,
-  totalPagePopular: 0
+  totalPagePopular: 0,
+  searchResultIndex: 1,
+  searchResult: [],
+  searchResultTotalPage: 0
 };
 
 const movieReducer = (state = initialState, action) => {
@@ -32,6 +35,7 @@ const movieReducer = (state = initialState, action) => {
         totalPage,
         pageIndex: nextIndex,
       };
+
     case actionTypes.GET_LIST_POPULAR_MOVIES_REQUEST:
       return {
         ...state,
@@ -49,6 +53,37 @@ const movieReducer = (state = initialState, action) => {
         listIdsPopular: _.compact(_.union(state.listIdsPopular, action.movies.listIds)),
         totalPagePopular,
         pageIndexPopular: nextPopularIndex,
+      };
+
+    case actionTypes.SEARCH_MOVIES_REQUEST:
+      return {
+        ...state,
+      };
+    case actionTypes.SEARCH_MOVIES_REQUEST_SUCCESS:
+      const receivedSearchResult = action.searchResult
+      const {pageIndex, totalPages} = action
+
+      let nextSearchIndex = _.isNumber(pageIndex) ? pageIndex + 1 : state.pageIndex + 1
+      if (nextSearchIndex >= totalPages) {
+        nextSearchIndex = totalPages
+      }
+      return {
+        ...state,
+        searchResult: _.compact(_.union(state.searchResult, receivedSearchResult)),
+        searchResultTotalPage: totalPages,
+        searchResultIndex: nextSearchIndex,
+      };
+    case actionTypes.SEARCH_MOVIES_REQUEST_FAILED:
+      return {
+        ...state,
+      };
+    case actionTypes.CLEAR_SEARCH_MOVIES: 
+      console.log('call clear')
+      return {
+        ...state,
+        searchResult: [],
+        searchResultTotalPage: 0,
+        searchResultIndex: 1
       };
     default:
       return state;
