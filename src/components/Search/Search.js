@@ -6,7 +6,8 @@ import {
     View,
     Text,
     FlatList, 
-    Image
+    Image,
+    TouchableOpacity
   } from 'react-native';
 import _ from 'lodash'
 
@@ -16,7 +17,7 @@ import { callSearchMovies, callClearSearchState } from 'actions/MovieActions';
 import { searchResultIndex, searchResult } from 'selectors/MoviesSelectors'
 import styles from './styles';
 
-const Search = () => {
+const Search = ({navigation}) => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
 
@@ -54,7 +55,7 @@ const Search = () => {
           onEndReached={() => debounceChangeText(searchIndex, text)}
           renderItem={({item}) => {
             return (
-              <View key={item.id} style={styles.movieItem}>
+              <TouchableOpacity key={item.id} style={styles.movieItem} onPress={() => navigation.navigate('MovieDetails', {id: item.id})}>
                 <Image
                   style={{width: 100, height: 200}}
                   source={{uri: BASE_IMG_URL+item.poster_path}}
@@ -64,7 +65,7 @@ const Search = () => {
                   <Text style={styles.overview} numberOfLines={5} ellipsizeMode='tail'>{item.overview}</Text>
                   <Text style={styles.published}>{strings.published}: {item.release_date}</Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             )
           }}
           keyExtractor={item => item.id.toString()}

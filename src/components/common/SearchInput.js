@@ -26,7 +26,6 @@ const SearchInput = (props) => {
   const inputRef = useRef(null);
 
   const clearText = () => {
-    console.log('call clear')
     setText('');
   };
 

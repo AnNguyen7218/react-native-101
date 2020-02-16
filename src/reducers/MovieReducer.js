@@ -78,7 +78,6 @@ const movieReducer = (state = initialState, action) => {
         ...state,
       };
     case actionTypes.CLEAR_SEARCH_MOVIES: 
-      console.log('call clear')
       return {
         ...state,
         searchResult: [],

@@ -36,22 +36,6 @@ class MovieController {
       return error;
     }
   }
-  // getMovieDetails = async (movieId) => {
-  //   try {
-  //     const result = await httpClient.post({
-  //       url: endpoints.DETAILS_MOVIE(movieId)+'?api_key='+API_KEY,
-  //       method: 'GET',
-  //       data: {
-  //         email,
-  //         password,
-  //       },
-  //     });
-  //     console.log(result.data)
-  //     return {};
-  //   } catch (error) {
-  //     return error;
-  //   }
-  // }
 }
 
 export default new MovieController();

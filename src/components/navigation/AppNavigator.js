@@ -6,8 +6,10 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Profile from '../Profile';
 import Home from '../Home';
 import Search from '../Search';
+import MovieDetails from '../MovieDetails'
 
 import homeIcon from 'assets/ic_home/ic_home.png';
+import searchIcon from 'assets/ic_search/search.png';
 import settingsIcon from 'assets/ic_settings/ic_settings.png';
 import Colors from 'helpers/Colors';
 
@@ -16,7 +18,7 @@ const iconForTab = ({ state }) => {
     case 'Home':
       return homeIcon;
     case 'Search':
-      return homeIcon;
+      return searchIcon;
     case 'Profile':
       return settingsIcon;
     default:
@@ -33,7 +35,20 @@ const TabIcon = ({ icon, tintColor }) => (// eslint-disable-line
 
 const ProfileStack = createStackNavigator({ Profile });
 const HomeStack = createStackNavigator({ Home });
-const SearchStack = createStackNavigator({ Search });
+const SearchStack = createStackNavigator({ 
+  Search: {
+    screen: Search,
+    navigationOptions: {
+      headerTitle: 'Search',
+    },
+  },
+  MovieDetails: {
+    screen: MovieDetails,
+    navigationOptions: {
+      headerTitle: 'Movies Details',
+    },
+  },
+});
 
 const AppStack = createBottomTabNavigator(
   {

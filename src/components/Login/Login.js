@@ -72,7 +72,7 @@ function Login(props) {
         if (result.isCancelled) {
           alert('Login cancelled')
         } else {
-          alert('Login success with permissions: ' + result.grantedPermissions.toString())
+          // alert('Login success with permissions: ' + result.grantedPermissions.toString())
           getAccessToken()
         }
       },
